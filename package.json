@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "this is react project",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev":"npx parcel index.html"
   },
   "author": "Sheikh Shahid",
   "license": "ISC",
