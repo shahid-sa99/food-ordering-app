@@ -15,7 +15,7 @@ const Body = () => {
           setRestuarantList(filteredList);
         }}
       >
-        Filter restuarants
+        Filtered restuarants
       </button>
       <div className="res-container">
         {restuarantList.map((restuarant) => (
