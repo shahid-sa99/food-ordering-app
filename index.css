@@ -54,3 +54,7 @@
   margin: 10px;
   cursor: pointer;
 }
+
+.filter-ctnr{
+  display: flex;
+}
