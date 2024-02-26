@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { resList } from "../common/mockData";
 import RestuarantCard from "./RestuarantCard";
 import Shimmer from "./Shimmer";
+import { useNavigate } from "react-router-dom";
+
 const Body = () => {
   const [restuarantList, setRestuarantList] = useState([]);
   const [filteredRestuarantList, setFilteredRestuarantList] = useState([]);
   const [searchText, setSearchext] = useState("");
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchData();

@@ -1,11 +1,19 @@
 import { CDN_URL } from "../common/constants";
+import { useNavigate } from "react-router-dom";
 
 const RestuarantCard = (props) => {
+  const navigate = useNavigate();
   const { resData } = props;
-  const { name, cuisines, avgRating, sla, costForTwo, cloudinaryImageId } =
+  const {id, name, cuisines, avgRating, sla, costForTwo, cloudinaryImageId } =
     resData.info;
   return (
-    <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
+    <div
+      onClick={() => {
+        navigate(`/restuarant/${id}`)
+      }}
+      className="res-card"
+      style={{ backgroundColor: "#f0f0f0" }}
+    >
       <img
         className="res-logo"
         alt="res-image"
