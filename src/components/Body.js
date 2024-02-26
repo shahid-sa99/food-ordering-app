@@ -1,21 +1,34 @@
 import { useEffect, useState } from "react";
 import { resList } from "../common/mockData";
 import RestuarantCard from "./RestuarantCard";
+import Shimmer from "./Shimmer";
 const Body = () => {
-  const [restuarantList, setRestuarantList] = useState(resList);
-  const [filteredRestuarantList,setFilteredRestuarantList] = useState(resList);
+  const [restuarantList, setRestuarantList] = useState([]);
+  const [filteredRestuarantList, setFilteredRestuarantList] = useState([]);
   const [searchText, setSearchext] = useState("");
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const fetchData = async () => {
-    // const data = await fetch(
-    //   "https://cors-anywhere.herokuapp.com/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.96340&lng=77.58550&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    // );
-    
+    const data = await fetch(
+      "https://corsproxy.org/?https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D12.96340%26lng%3D77.58550%26is-seo-homepage-enabled%3Dtrue%26page_type%3DDESKTOP_WEB_LISTING"
+    );
+    const restuarants = await data.json();
+    setRestuarantList(
+      restuarants?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
+    setFilteredRestuarantList(
+      restuarants?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
   };
 
-  return (
+  return restuarantList.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter-ctnr">
         <div className="search">
@@ -30,7 +43,7 @@ const Body = () => {
               const filteredList = restuarantList.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
               );
-              setFilteredRestuarantList(filteredList)
+              setFilteredRestuarantList(filteredList);
             }}
           >
             Search
