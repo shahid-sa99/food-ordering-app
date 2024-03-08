@@ -3,31 +3,29 @@ import { resList } from "../common/mockData";
 import RestuarantCard from "./RestuarantCard";
 import Shimmer from "./Shimmer";
 import { useNavigate } from "react-router-dom";
+import useOnlineStatus from "../utils/hooks/useOnlineStatus";
+import useRestuarantList from "../utils/hooks/useRestuarantList";
 
 const Body = () => {
   const [restuarantList, setRestuarantList] = useState([]);
   const [filteredRestuarantList, setFilteredRestuarantList] = useState([]);
   const [searchText, setSearchext] = useState("");
-  const navigate = useNavigate()
+  const restuarants = useRestuarantList();
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    setFilteredRestuarantList(restuarants);
+    setRestuarantList(restuarants);
+  }, [restuarants]);
 
-  const fetchData = async () => {
-    const data = await fetch(
-      "https://corsproxy.org/?https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D12.96340%26lng%3D77.58550%26is-seo-homepage-enabled%3Dtrue%26page_type%3DDESKTOP_WEB_LISTING"
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus === false) {
+    return (
+      <h1>
+        Looks like there is some connectivity issue, Please check your internet
+      </h1>
     );
-    const restuarants = await data.json();
-    setRestuarantList(
-      restuarants?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
-    setFilteredRestuarantList(
-      restuarants?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
-  };
+  }
 
   return restuarantList.length === 0 ? (
     <Shimmer />
