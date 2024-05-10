@@ -10,13 +10,14 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestuarantMenu from "./components/RestuarantMenu";
 // import Grocery from "./components/Grocery";
+import "index.css";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
 
 const AppLayout = () => {
   return (
-    <div className="app">
+    <div className="app   ">
       <Header />
       <Outlet />
     </div>

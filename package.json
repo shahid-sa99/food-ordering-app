@@ -4,7 +4,7 @@
   "description": "this is react project",
   "scripts": {
     "test": "jest",
-    "dev": "npx parcel index.html"
+    "dev": "node server.js && npx parcel index.html"
   },
   "author": "Sheikh Shahid",
   "license": "ISC",
@@ -13,8 +13,12 @@
     "process": "^0.11.10"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "cross-fetch": "^4.0.0",
+    "express": "^4.19.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.1"
+    "react-router-dom": "^6.22.1",
+    "tailwindcss": "^3.4.3"
   }
 }

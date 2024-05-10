@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 const RestuarantCard = (props) => {
   const navigate = useNavigate();
   const { resData } = props;
-  const {id, name, cuisines, avgRating, sla, costForTwo, cloudinaryImageId } =
+  const { id, name, cuisines, avgRating, sla, costForTwo, cloudinaryImageId } =
     resData.info;
   return (
     <div
       onClick={() => {
-        navigate(`/restuarant/${id}`)
+        navigate(`/restuarant/${id}`);
       }}
       className="res-card"
       style={{ backgroundColor: "#f0f0f0" }}
@@ -18,6 +18,7 @@ const RestuarantCard = (props) => {
         className="res-logo"
         alt="res-image"
         src={CDN_URL + cloudinaryImageId}
+        style={{ height: "134px", width: "200px" }}
       />
       <h3>{name}</h3>
       <h4>{cuisines.join(", ")}</h4>

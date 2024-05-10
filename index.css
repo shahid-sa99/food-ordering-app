@@ -75,8 +75,11 @@
   background-color: #e3e3e3;
 }
 
-
-.user-card{
+.user-card {
   padding: 10px;
   border: 1px solid black;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
