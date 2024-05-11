@@ -4,29 +4,29 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [btnText, setBtnText] = useState("Login");
   return (
-    <div className="header">
+    <div className="flex  justify-between shadow-lg bg-pink-200  mb-2 ">
       <div className="logo-container">
         <img
-          className="logo"
+          className="w-32 "
           src="https://png.pngtree.com/template/20191014/ourmid/pngtree-pin-food-delivery-map-location-delivery-logo-concept-image_318151.jpg"
         ></img>
       </div>
-      <div className="nav-bar">
-        <ul>
-          <li>
+      <div className="flex items-center">
+        <ul className="flex p-4 m-4  ">
+          <li className="px-2">
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li className="px-2">
             <Link to="/about">About Us</Link>
           </li>
-          <li>
+          <li className="px-2">
             <Link to="/contact">Contact Us</Link>
           </li>
-          <li>
+          <li className="px-2">
             <Link to="/grocery">Grocery</Link>
           </li>
 
-          <li>Cart</li>
+          <li className="px-2">Cart</li>
           <button
             className="login-btn"
             onClick={() =>
