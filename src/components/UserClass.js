@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../utils/hooks/UserContext";
 
 class UserClass extends React.Component {
   constructor(props) {
@@ -35,10 +36,17 @@ class UserClass extends React.Component {
     const { name, location, avatar_url } = this.state.userInfo;
     console.log(this.props.name + "child rendrer");
     return (
-      <div  className="m-4 p-4 bg-gray-50 rounded-lg">
+      <div className="m-4 p-4 bg-gray-50 rounded-lg">
         <h2>Name: {name}</h2>
         <h3>Location: {location}</h3>
         <h3>Contact : shahid@gmail.com</h3>
+        <h3>
+          <UserContext.Consumer>
+            {(data) => {
+              return <span>{data.loggedInUser}</span>;
+            }}
+          </UserContext.Consumer>
+        </h3>
         <h3>{avatar_url}</h3>
       </div>
     );

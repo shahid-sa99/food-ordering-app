@@ -1,37 +1,62 @@
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestuarantMenu from "../utils/hooks/useRestuarantMenu";
-
+import RestuarantCategory from "./RestuarantCategory";
+import { useState } from "react";
 
 const RestuarantMenu = () => {
-  const {resId} = useParams();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const itemCategoryClickHandler = () => {
+    setActiveIndex(!activeIndex);
+  };
+  const { resId } = useParams();
 
   const resInfo = useRestuarantMenu(resId);
 
   if (resInfo === null) return <Shimmer />;
 
   const { name, cuisines, costForTwoMessage } =
-    resInfo?.cards[0]?.card?.card?.info;
+    resInfo?.cards[2]?.card?.card?.info;
 
   const { itemCards } =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
+
+  const itemCategories =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards.filter(
+      (item) => {
+        return (
+          item.card.card["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        );
+      }
+    );
+
+  
 
   return (
-    <div className="menu">
-      <h1>{name}</h1>
-      <h4>
+    <div className=" text-center ">
+      <h1 className="font-bold my-6  text-2xp">{name}</h1>
+      <h4 className="font-bold text-lg">
         {cuisines.join(",")} - {costForTwoMessage}
       </h4>
-      <ul>
-        {itemCards.map((item) => {
-          return (
-            <li key={item.card.info.id}>
-              {item.card.info.name} -{" "}
-              {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
-            </li>
-          );
-        })}
-      </ul>
+
+      {itemCategories.map((category, index) => {
+        return (
+          <RestuarantCategory
+            key={index}
+            data={category?.card?.card}
+            activeIndex={activeIndex}
+            index={index}
+            setActiveIndex={() => {
+              if (activeIndex !== index) {
+                setActiveIndex(index);
+              } else {
+                setActiveIndex(-1);
+              }
+            }}
+          />
+        );
+      })}
     </div>
   );
 };

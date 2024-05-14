@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/hooks/UserContext";
 
 const Header = () => {
   const [btnText, setBtnText] = useState("Login");
+  const user = useContext(UserContext);
+  const { loggedInUser } = user;
   return (
     <div className="flex  justify-between shadow-lg bg-pink-200  mb-2 ">
       <div className="logo-container">
@@ -27,6 +30,7 @@ const Header = () => {
           </li>
 
           <li className="px-2">Cart</li>
+          <li className="px-2">{loggedInUser} </li>
           <button
             className="login-btn"
             onClick={() =>

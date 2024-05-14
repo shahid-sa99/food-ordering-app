@@ -11,7 +11,7 @@ const RestuarantCard = (props) => {
       onClick={() => {
         navigate(`/restuarant/${id}`);
       }}
-      className="m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-200 cursor-pointer "
+      className="m-4 p-4 w-[250px] h-[350px] rounded-lg bg-gray-100 hover:bg-gray-200 cursor-pointer "
     >
       <img
         className=" rounded-lg h-[134px] w-[200px]  "
@@ -28,3 +28,15 @@ const RestuarantCard = (props) => {
 };
 
 export default RestuarantCard;
+
+
+export const restuarantCardHOC =(Test)=>{
+    return (props)=>{
+      return(
+        <div>
+           <label className=" absolute bg-black text-white mx-2 my-4 p-1 rounded-lg ">Promoted</label>
+           <Test {...props} />
+        </div>
+      )
+    }
+}

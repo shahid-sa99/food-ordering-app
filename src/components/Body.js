@@ -1,16 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { resList } from "../common/mockData";
-import RestuarantCard from "./RestuarantCard";
+import RestuarantCard, { restuarantCardHOC } from "./RestuarantCard";
 import Shimmer from "./Shimmer";
 import { useNavigate } from "react-router-dom";
 import useOnlineStatus from "../utils/hooks/useOnlineStatus";
 import useRestuarantList from "../utils/hooks/useRestuarantList";
+import UserContext from "../utils/hooks/userContext";
 
 const Body = () => {
   const [restuarantList, setRestuarantList] = useState([]);
   const [filteredRestuarantList, setFilteredRestuarantList] = useState([]);
   const [searchText, setSearchext] = useState("");
   const restuarants = useRestuarantList();
+  const RestuarantCardPromoted = restuarantCardHOC(RestuarantCard);
+  const user = useContext(UserContext);
+  const { loggedInUser } = user;
 
   useEffect(() => {
     setFilteredRestuarantList(restuarants);
@@ -52,24 +56,38 @@ const Body = () => {
             Search
           </button>
         </div>
-        <div >
-        <button
-          className="bg-gray-100 rounded-lg px-4 py-2 mt-2 "
-          onClick={() => {
-            const filteredList = filteredRestuarantList.filter(
-              (res) => res.info.avgRating >= 4.5
-            );
-            setFilteredRestuarantList(filteredList);
-          }}
-        >
-          Filter restuarants
-        </button>
+        <div>
+          <button
+            className="bg-gray-100 rounded-lg px-4 py-2 mt-2 "
+            onClick={() => {
+              const filteredList = filteredRestuarantList.filter(
+                (res) => res.info.avgRating >= 4.5
+              );
+              setFilteredRestuarantList(filteredList);
+            }}
+          >
+            Filter restuarants
+          </button>
+          <span className="pl-2">userName:</span>
+          <input
+            className=" border border-black border-solid m-4 "
+            value={loggedInUser}
+          />
         </div>
       </div>
       <div className="flex flex-wrap">
-        {filteredRestuarantList.map((restuarant) => (
-          <RestuarantCard key={restuarant.info.id} resData={restuarant} />
-        ))}
+        {filteredRestuarantList.map((restuarant) => {
+          return restuarant.info.avgRating >= 4.4 ? (
+            <RestuarantCardPromoted
+              key={restuarant.info.id}
+              resData={restuarant}
+            />
+          ) : (
+            <RestuarantCard key={restuarant.info.id} resData={restuarant} />
+          );
+
+          // <RestuarantCard key={restuarant.info.id} resData={restuarant} />
+        })}
       </div>
     </div>
   );
