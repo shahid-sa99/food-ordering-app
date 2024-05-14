@@ -9,7 +9,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestuarantMenu from "./components/RestuarantMenu";
-import UserContext from "./utils/hooks/UserContext";
+import UserContext from "./utils/hooks/userContext";
 // import Grocery from "./components/Grocery";
 
 const Grocery = lazy(() => import("./components/Grocery"));
@@ -21,12 +21,12 @@ const AppLayout = () => {
   // user authentication
   useEffect(() => {
     // make API to get user data
-    const data = { name: "Shasan@51" };
+    const data = { name: "Shahid" };
     setUserName(data?.name);
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+    <UserContext.Provider value={{ loggedInUser: userName,setUserName }}>
       <div className="app">
         <Header />
         <Outlet />

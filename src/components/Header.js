@@ -1,11 +1,10 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import UserContext from "../utils/hooks/UserContext";
+import UserContext from "../utils/hooks/userContext";
 
 const Header = () => {
   const [btnText, setBtnText] = useState("Login");
-  const user = useContext(UserContext);
-  const { loggedInUser } = user;
+  const {loggedInUser} = useContext(UserContext)
   return (
     <div className="flex  justify-between shadow-lg bg-pink-200  mb-2 ">
       <div className="logo-container">

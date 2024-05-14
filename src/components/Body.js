@@ -13,8 +13,7 @@ const Body = () => {
   const [searchText, setSearchext] = useState("");
   const restuarants = useRestuarantList();
   const RestuarantCardPromoted = restuarantCardHOC(RestuarantCard);
-  const user = useContext(UserContext);
-  const { loggedInUser } = user;
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   useEffect(() => {
     setFilteredRestuarantList(restuarants);
@@ -69,9 +68,13 @@ const Body = () => {
             Filter restuarants
           </button>
           <span className="pl-2">userName:</span>
+
           <input
             className=" border border-black border-solid m-4 "
             value={loggedInUser}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
           />
         </div>
       </div>

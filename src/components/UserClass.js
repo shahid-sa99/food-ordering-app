@@ -1,5 +1,5 @@
 import React from "react";
-import UserContext from "../utils/hooks/UserContext";
+import UserContext from "../utils/hooks/userContext";
 
 class UserClass extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class UserClass extends React.Component {
     console.log(this.props.name + "child componentDidMount");
     const data = await fetch("https://api.github.com/users/shahid-sa99");
     const json = await data.json();
-    console.log(json);
+    
     this.setState({
       userInfo: json,
     });
@@ -43,7 +43,7 @@ class UserClass extends React.Component {
         <h3>
           <UserContext.Consumer>
             {(data) => {
-              return <span>{data.loggedInUser}</span>;
+              return <div>{data.loggedInUser}</div>;
             }}
           </UserContext.Consumer>
         </h3>
