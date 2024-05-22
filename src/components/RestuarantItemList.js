@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { CDN_URL } from "../common/constants";
+import { useDispatch } from "react-redux";
+import { adddItem } from "../utils/store/cartSlice";
 
 function RestuarantItemList({ items }) {
+  const dispatch = useDispatch();
+
+  const addItemClickHandler = (item) => {
+    dispatch(adddItem(item));
+  };
+
   return (
     <div>
       {items.map((item) => {
@@ -25,7 +33,12 @@ function RestuarantItemList({ items }) {
                   src={CDN_URL + item?.card?.info?.imageId}
                   className="w-[160px] h-[150px] rounded-lg "
                 ></img>
-                <span className="w-[120px] h-[40px] flex items-center m-auto px-10 border-[1px] -bottom-3 left-[22px] font-bold text-xl absolute bg-white border-gray-500 text-green-300 rounded-lg ">
+                <span
+                  onClick={() => {
+                    addItemClickHandler(item);
+                  }}
+                  className="w-[120px] h-[40px] flex items-center m-auto px-10 border-[1px] -bottom-3 left-[22px] font-bold text-xl absolute bg-white border-gray-500 text-green-300 rounded-lg "
+                >
                   Add
                 </span>
               </div>
